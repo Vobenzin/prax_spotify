@@ -3,6 +3,7 @@ import { Kysely } from "kysely";
 import { DB } from "@/lib/db-types";
 import SQLite from "better-sqlite3";
 import Image from "next/image";
+import './style.css';
 
 export default async function Home() {
   const dialect = new SqliteDialect({
@@ -15,12 +16,21 @@ export default async function Home() {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="relative flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <p className="text-4xl font-bold">Spotify</p>
+        <p className="text-4xl font-bold ">Spotify</p>
+        <div className="spotify-container">
+          {authors.map((AlbumAuthor) => (
+            <div className="album-card" key={AlbumAuthor.al_id}>
+              <div className="album-name">{AlbumAuthor.al_name}</div>
+              <div className="release-date">
+                {new Date(AlbumAuthor.release_date).toDateString()}
+              </div>
+              <div className="author-name">{AlbumAuthor.au_name}</div>
+            </div>
+          ))}
+        </div>
       </main>
 
-      <div>{authors.map(AlbumAuthor=> (
-      <div key={AlbumAuthor.al_id}>{AlbumAuthor.al_name} | {new Date(AlbumAuthor.release_date).toDateString()} | {AlbumAuthor.au_name}</div>))}
-      </div>
+
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <p>Footer</p>
         
