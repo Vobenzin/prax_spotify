@@ -50,7 +50,7 @@ export async function seed(db: Kysely<DB>): Promise<void> {
     }
     for(let i=0; i<numSongs; i++){
       await db.insertInto("songs").values({
-        album_id: 1,
+        album_id: album.id ,
         name: faker.music.songName(),
         duration: faker.number.int({min:80,max:240})
       })
