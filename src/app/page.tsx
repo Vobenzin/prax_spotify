@@ -4,6 +4,7 @@ import { DB } from "@/lib/db-types";
 import SQLite from "better-sqlite3";
 import Image from "next/image";
 import './style.css';
+import Link from "next/link";
 
 export default async function Home() {
   const dialect = new SqliteDialect({
@@ -22,9 +23,17 @@ export default async function Home() {
             <div className="album-card" key={AlbumAuthor.al_id}>
               <div className="album-name">{AlbumAuthor.al_name}</div>
               <div className="release-date">
-                {new Date(AlbumAuthor.release_date).toDateString()}
+                Rel Date: {new Date(AlbumAuthor.release_date).toDateString()}
               </div>
-              <div className="author-name">{AlbumAuthor.au_name}</div>
+              <div className="author-name">Author: {AlbumAuthor.au_name}</div>
+              <div className="mt-6">
+                  <Link
+                    className="btn btn-primary btn-block"
+                    href={`/album/${AlbumAuthor.al_id}`}
+                  >
+                    Detail
+                  </Link>
+                </div>
             </div>
           ))}
         </div>
