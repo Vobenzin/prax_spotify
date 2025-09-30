@@ -1,16 +1,10 @@
-import { SqliteDialect } from "kysely";
-import { Kysely } from "kysely";
-import { DB } from "@/lib/db-types";
-import SQLite from "better-sqlite3";
-import Image from "next/image";
 import './style.css';
 import Link from "next/link";
+import { getDB } from "@/lib/db";
 
 export default async function Home() {
-  const dialect = new SqliteDialect({
-    database: new SQLite("db.sqlite")
-  })
-  const db = new Kysely<DB>({dialect,});
+
+  const db = getDB()
 
   const authors =await db.selectFrom("authors").innerJoin("albums","albums.author_id","authors.id").select(["albums.id as al_id","albums.release_date","albums.name as al_name","authors.name as au_name"]).execute()
   console.log(authors)

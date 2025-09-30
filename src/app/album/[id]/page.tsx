@@ -1,18 +1,15 @@
-import { DB } from "@/lib/db-types";
-import { Kysely, SqliteDialect } from "kysely";
-import SQLite from "better-sqlite3";
+import { getDB } from "@/lib/db";
+
 export default async function AlbumDetail({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const dialect = new SqliteDialect({
-    database: new SQLite("db.sqlite")
-  })
-  const db = new Kysely<DB>({dialect,});
 
-  const songs =await db.selectFrom("songs").where('songs.album_id', '==', `${id}`).select(["songs.id", 'songs.duration',"songs.name"]).execute()
+  const db = getDB()
+
+  const songs =await db.selectFrom("songs").where('songs.album_id', '=', Number(id)).select(["songs.id", 'songs.duration',"songs.name"]).execute()
   console.log(songs)
 
   console.log("Album detail id:", id);
@@ -22,15 +19,24 @@ export default async function AlbumDetail({
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <div>ALBUM DETAIL: {id}
         </div>
-        <div className="spotify-container">
-          {songs.map((song) => (
+        <div>
+          <table className="table">
+            <thead>
+              <th>#</th>
+              <th>Name</th>
+              <th>Duration</th>
+            </thead>
+            <tbody>
+              {songs.map((song) => (
+                  <tr key={song.id}>
+                    <td className="">{song.id}</td>
+                    <td className="">{song.name}</td>
+                    <td className="">{Math.floor(song.duration/60)}:{song.duration%60 }</td>
+                  </tr>
 
-            <div className="album-card" key={song.id}>
-              <div className="album-name">{song.name}</div>
-              <div className="author-name">ID: {song.id}</div>
-              <div className="author-name">DURATION: {Math.floor(song.duration/60)}:{song.duration%60 }min</div>
-            </div>
-          ))}
+              ))}
+          </tbody>
+          </table>
         </div>
       </main>
     </div>
