@@ -17,10 +17,6 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
-.album-card:hover {
-  transform: scale(1.05);
-  cursor: pointer;
-}
 
 .album-name {
   font-size: 16px;

@@ -6,7 +6,7 @@ export default async function Home() {
 
   const db = getDB()
 
-  const authors =await db.selectFrom("authors").innerJoin("albums","albums.author_id","authors.id").select(["albums.id as al_id","albums.release_date","albums.name as al_name","authors.name as au_name"]).execute()
+  const authors =await db.selectFrom("authors").innerJoin("albums","albums.author_id","authors.id").select(["albums.id as al_id","albums.release_date","albums.name as al_name","authors.name as au_name","authors.id as au_id"]).execute()
   console.log(authors)
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
@@ -25,9 +25,18 @@ export default async function Home() {
                     className="btn btn-primary btn-block"
                     href={`/album/${AlbumAuthor.al_id}`}
                   >
-                    Detail
+                    Album Detail
                   </Link>
                 </div>
+                <div className="mt-6">
+                <Link
+                    className="btn btn-primary btn-block"
+                    href={`/author/${AlbumAuthor.au_id}`}
+                  >
+                    Author Detail
+                  </Link>
+                </div>
+
             </div>
           ))}
         </div>
