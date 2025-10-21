@@ -35,7 +35,7 @@ export default async function AuthorDetail({
             ))}
         </div>
 
-        <div>AUTHOR's ALBUMS:
+        <div>AUTHORs ALBUMS:
         </div>
         <div className="spotify-container">
           {authors_albums.map((AlbumAuthor) => (
