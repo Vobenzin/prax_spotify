@@ -4,7 +4,8 @@ import { faker } from "@faker-js/faker";
 
 export async function seed(db: Kysely<DB>): Promise<void> {
   await db.deleteFrom("playlists_songs").execute(); 
-  await db.deleteFrom("songs").execute();         
+  await db.deleteFrom("songs").execute();        
+  await db.deleteFrom("users").execute();     
   await db.deleteFrom("playlists").execute();    
   await db.deleteFrom("albums").execute();         
   await db.deleteFrom("authors").execute();  
@@ -64,6 +65,14 @@ export async function seed(db: Kysely<DB>): Promise<void> {
     }
 
   }
+  await db 
+    .insertInto("users")
+    .values({email: faker.person.jobArea(),
+              password: faker.color.human(),
+              name : faker.person.firstName(),
+              id : 1
+    })
+    .execute();
   for(let users_am = 0 ; users_am < 10; users_am++){
     await db 
     .insertInto("users")
