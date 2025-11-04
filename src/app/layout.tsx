@@ -33,6 +33,7 @@ export default function RootLayout({
         <NavBar></NavBar>
         <div className='album-name'><Link href={`/`} >Back To Menu</Link></div>
         <div className='album-name'><Link href={`/playlists`} >Playlists</Link></div>
+        <div className='album-name'><Link href={`/profile`} >Profile</Link></div>
         {children}
       </body>
     </html>

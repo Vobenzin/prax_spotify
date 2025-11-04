@@ -22,7 +22,7 @@ const playlist = await db.selectFrom("playlists").where('id', '=', Number(id)).s
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
       <div className='album-name'>{playlist[0].name}
         </div>
-        <div className='album-name'>PLAYLIST' SONGS:
+        <div className='album-name'>PLAYLIST`s SONGS:
         </div>
         <div>
             {songs.map((song) => (

@@ -4,10 +4,11 @@ import { faker } from "@faker-js/faker";
 
 export async function seed(db: Kysely<DB>): Promise<void> {
   await db.deleteFrom("playlists_songs").execute(); 
-  await db.deleteFrom("songs").execute();          
+  await db.deleteFrom("songs").execute();         
   await db.deleteFrom("playlists").execute();    
   await db.deleteFrom("albums").execute();         
   await db.deleteFrom("authors").execute();  
+  
   
 
   for (let i = 0; i < 20; i += 1) {
@@ -63,28 +64,34 @@ export async function seed(db: Kysely<DB>): Promise<void> {
     }
 
   }
+  for(let users_am = 0 ; users_am < 10; users_am++){
+    await db 
+    .insertInto("users")
+    .values({email: faker.person.jobArea(),
+              password: faker.color.human(),
+              name : faker.person.firstName()
+    })
+    .execute();
+  }
 
-  for (let i = 0; i < 10; i += 1) {
+  for (let i = 0; i < 15; i += 1) {
     await db
       .insertInto("playlists")
       .values({
         name: faker.music.album(),
-        
+        user_id: faker.number.int({min:1,max:10})
       })
       .execute();
   }
 
   const playlists = await db.selectFrom("playlists").selectAll().execute();
   const songs = await db.selectFrom("songs").selectAll().execute();
-  let songs_length = songs.length
-  var song = songs.at(0)
+  const songs_length = songs.length
+  let song = songs.at(0)
 
   for(const playlist of playlists){
-    let numPlaylistSongs = faker.number.int({min:3,max:10})
-    let startingSongId = faker.number.int({min:0,max:songs_length-(numPlaylistSongs)})
-    let biggestGap = Math.floor((songs_length-startingSongId)/numPlaylistSongs)//startingSongId + p_song_id*biggestGap +faker.number.int({min:0, max:biggestGap-1})
+    const numPlaylistSongs = faker.number.int({min:3,max:10})
     
-
     for(let p_song_id = 0; p_song_id < numPlaylistSongs; p_song_id++){
       song = songs.at(faker.number.int({min:0,max:songs_length-1}))
       await db
@@ -96,5 +103,9 @@ export async function seed(db: Kysely<DB>): Promise<void> {
       .execute();
     }
   }
+
+
 }
+
+
 
