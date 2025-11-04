@@ -24,7 +24,7 @@ export default async function Profile() {
                     className="btn btn-primary btn-block"
                     href={`profile/${user.id}/playlists`}
                   >
-                    PLAYLISTs more `{`>`}`
+                    Show players playlists `{`>`}`
                   </Link>
                 </div>
             ))}

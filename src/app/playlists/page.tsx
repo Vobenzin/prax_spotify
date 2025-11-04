@@ -25,7 +25,7 @@ export default async function AuthorDetail() {
                     className="btn btn-primary btn-block"
                     href={`/playlist/${playlist.id}`}
                   >
-                    Show players playlists `{`>`}`
+                    PLAYLISTs more `{`>`}`
                   </Link>
                 </div>
                 </div>
