@@ -1,6 +1,7 @@
 import './style.css';
 import Link from "next/link";
 import { getDB } from "@/lib/db";
+import { RemovePlaylistSongButton } from './RemovePlaylistButton';
 
 export default async function PlaylistDetail({
   params,
@@ -29,6 +30,7 @@ const playlist = await db.selectFrom("playlists").where('id', '=', Number(id)).s
                 <div key={song.id}>
                   <p className="">Id: {song.id}</p>
                   <p className="">Name: {song.name}</p>
+                  <RemovePlaylistSongButton playlistId={Number(id)} songId={song.id}></RemovePlaylistSongButton>
                 </div>
 
             ))}
