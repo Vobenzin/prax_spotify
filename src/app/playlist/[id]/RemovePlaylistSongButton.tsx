@@ -16,7 +16,7 @@ export function RemovePlaylistSongButton(props: {
         removeSongFromPlaylist(props.playlistId, props.songId);
       }}
     >
-      Remove
+      Remove S
     </button>
   );
 }

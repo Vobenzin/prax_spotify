@@ -1,17 +1,16 @@
 "use client";
 
-import { addSongToPlaylist } from "@/actions/playlists";
+import { AddSongToPlaylist } from "@/actions/playlists";
 
-export function AddSongToPlaylistButton(props: { songId: number }) {
+export function AddSongToPlaylistButton(props: {playlistname: string, playlistId: number,  songId: number }) {
   return (
     <button
       className="btn btn-xs"
       onClick={(e) => {
-        console.log("Add song to playlist");
-        addSongToPlaylist(props.songId);
+        AddSongToPlaylist(props.playlistId, props.songId);
       }}
     >
-      Remove
+      {props.playlistname}
     </button>
   );
 }

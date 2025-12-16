@@ -34,6 +34,7 @@ export default function RootLayout({
         <div className='album-name'><Link href={`/`} >Back To Menu</Link></div>
         <div className='album-name'><Link href={`/playlists`} >Playlists</Link></div>
         <div className='album-name'><Link href={`/profile`} >Profile</Link></div>
+        <div className='album-name'><Link href={`/playlists/new`} > New Playlist</Link></div>
         {children}
       </body>
     </html>

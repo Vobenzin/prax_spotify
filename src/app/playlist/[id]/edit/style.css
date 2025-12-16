@@ -1,0 +1,37 @@
+.spotify-container {
+  background-color: #121212;
+  color: #ffffff;
+  padding: 20px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.album-card {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 16px;
+  width: 220px;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+
+.album-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #1db954; 
+}
+
+.release-date {
+  font-size: 14px;
+  color: #b3b3b3;
+  margin-bottom: 6px;
+}
+
+.author-name {
+  font-size: 14px;
+  color: #ffffff;
+}

@@ -20,6 +20,12 @@ export default async function AuthorDetail() {
               <RemovePlaylistButton
                 playlistId={Number(playlist.id)}
               ></RemovePlaylistButton>
+                <Link
+                  className="btn btn-xs"
+                  href={`/playlist/${playlist.id}/edit`}
+                >
+                  Edit
+                </Link>
               <div className="mt-6">
                 <Link
                   className="btn btn-primary btn-block"

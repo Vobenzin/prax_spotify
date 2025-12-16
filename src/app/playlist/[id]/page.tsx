@@ -1,9 +1,11 @@
+
 import "./style.css";
 import Link from "next/link";
 import { getDB } from "@/lib/db";
 import { RemovePlaylistSongButton } from "./RemovePlaylistSongButton";
 import { RemovePlaylistButton } from "./RemovePlaylistButton";
 import { AddSongToPlaylistButton } from "./AddSongToPlaylistButton";
+import {  AddSongToPlaylist } from "@/actions/playlists";
 
 export default async function PlaylistDetail({
   params,
@@ -17,6 +19,11 @@ export default async function PlaylistDetail({
   const playlist = await db
     .selectFrom("playlists")
     .where("id", "=", Number(id))
+    .selectAll()
+    .execute();
+
+  const playlists = await db
+    .selectFrom("playlists")
     .selectAll()
     .execute();
 
@@ -44,10 +51,20 @@ export default async function PlaylistDetail({
                 playlistId={Number(id)}
                 songId={song.id}
               ></RemovePlaylistSongButton>
-              <AddSongToPlaylistButton
-                songId={song.id}
-              ></AddSongToPlaylistButton>
-            </div>
+              <div className="dropdown dropdown-right dropdown-center">
+                <div tabIndex={0} role="button" className="btn m-1">Add to Playlist</div>
+                <ul tabIndex={-1} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                  {playlists.map((playlist) => (
+                    <li key={playlist.id+101+playlist.id }>
+                      <AddSongToPlaylistButton 
+                      playlistname={playlist.name}
+                      playlistId={playlist.id}
+                      songId={song.id}>
+                      </AddSongToPlaylistButton>
+                    </li>
+                  ))}
+                </ul></div>
+              </div>
           ))}
         </div>
       </main>
